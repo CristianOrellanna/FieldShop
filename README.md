@@ -1,9 +1,9 @@
 # FieldShop
-Proyecto web con nombre "FieldShop", con login, perfiles de usuario y  SQL relacional de tercera forma normal.
+Web project named "FieldShop", with login, user profiles and third normal form relational SQL.
 
-Comandos:<br/>
-*Instalacion de modulos:<br/>
+Commands:<br/>
+*Module installation:<br/>
 npm init<br/>
-*A continuacion => "express-session" para manejo de sesiones de usuario, "mysql2" para conexion a la base de datos,<br/>
-"ejs" para las plantillas, "dotenv" para las variables de entorno, y por ultimo "bcryptjs" para el hashing de contraseñas:<br/>
+*Specifications=> "express-session" for user session management, "mysql2" for database connection,<br/>
+"ejs" for templates, "dotenv" for environment variables, and finally "bcryptjs" for password hashing:<br/>
 npm i express express-session mysql2 ejs dotenv bcryptjs

@@ -1,0 +1,27 @@
+{
+  "name": "fieldshop",
+  "version": "1.0.0",
+  "description": "final project to graduate from a computer science degree",
+  "main": "index.js",
+  "scripts": {
+    "test": "npm test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CristianOrellanna/FieldShop.git"
+  },
+  "author": "Cristian Marcelo Orellana Galaz",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CristianOrellanna/FieldShop/issues"
+  },
+  "homepage": "https://github.com/CristianOrellanna/FieldShop#readme",
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "dotenv": "^16.4.1",
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "express-session": "^1.18.0",
+    "mysql2": "^3.9.1"
+  }
+}

@@ -1,0 +1,47 @@
+const express = require('express'); 
+const app = express();
+
+//urlencoded to capture form data
+app.use(express.urlencoded({extended:false}));
+app.use(express.json());
+
+//dotenv for environment variables
+const dotenv = require('dotenv');
+dotenv.config({path:'./env/.env'});
+
+//public directory
+app.use('/resources', express.static('public'));
+app.use('/resources', express.static(__dirname + '/public'));
+
+//setting as ejs template engine
+app.set('view engine', 'ejs');
+
+//routes
+app.get('/', (req, res) => {
+    res.render('index.ejs');
+})
+
+//invoking bcryptjs
+const bcryptjs = require('bcryptjs');
+
+//port assignment
+app.listen(8000, (req, res) =>{
+    console.log('Hola!, el servidor esta ejecutandose en http://localhost:8000');
+})
+
+//session variable
+const session = require('express-session');
+app.use(session({
+    secret:'secret',
+    resave: true,
+    saveUninitialized: true
+}))
+
+//invoking the db connection module
+const connection = require('./database/db');
+
+
+
+
+
+

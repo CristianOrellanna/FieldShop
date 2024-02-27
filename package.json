@@ -4,7 +4,8 @@
   "description": "final project to graduate from a computer science degree",
   "main": "index.js",
   "scripts": {
-    "test": "npm test"
+    "test": "npm test",
+    "start": "node app.ejs"
   },
   "repository": {
     "type": "git",

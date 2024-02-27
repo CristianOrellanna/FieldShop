@@ -1,9 +1,9 @@
 CREATE TABLE Usuarios (
     IdCliente INT PRIMARY KEY,
-    User VARCHAR(50),
-    Name VARCHAR(50),
-    Rol VARCHAR(50),
-    Pass VARCHAR(50)
+    user VARCHAR(50),
+    name VARCHAR(50),
+    rol VARCHAR(50),
+    pass VARCHAR(50)
 );
 
 CREATE TABLE Roles (

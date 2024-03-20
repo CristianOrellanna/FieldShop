@@ -3,7 +3,7 @@ CREATE TABLE Usuarios (
     user VARCHAR(50),
     name VARCHAR(50),
     rol VARCHAR(50),
-    pass VARCHAR(50)
+    pass VARCHAR(100)
 );
 
 CREATE TABLE Roles (

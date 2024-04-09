@@ -1,42 +1,45 @@
 @import url('https://fonts.googleapis.com/css2?family=Luckiest+Guy&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=PT+Serif:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 
 html,
 body {
   height: 100%;
+  padding: 0%;
+  background-color:#eee;
 }
 
-/*button know*/
-.btnConocer {
-  padding: 10px 20px;
-  background-color: #ea8f33;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+/*button invisible for user*/
+.invisible-button {
+  display: none;
 }
 
-.btnConocer:hover {
-  background-color: #f4a108;
+/*Tittle homepage*/
+.Tittle-Home{
+  font-family: "PT Serif", serif;
+  font-weight: 700;
+  font-style: italic;
 }
 
-.btnConocer:active {
-  background-color: #cdc3b0;
+.Tittle-HomeWord{
+  font-family: "PT Serif", serif;
+  font-weight: 400;
+  font-style: normal;
 }
 
 /*tittle logo*/
-.titulo{
-  font-family: "Luckiest Guy", cursive;
+.logo{
+  font-family: "PT Serif", serif;
   font-weight: 500;
   font-style: normal;
   font-size: 35px;
-  color: rgb(240, 195, 80);
+  color: rgb(8, 8, 8);
 }
 
 /*form*/
 .text-muted{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .form-signin {
@@ -49,16 +52,17 @@ body {
 }
 
 .form-signin input[type="email"] {
-  margin-bottom: -1px;
-  border-bottom-right-radius: 0;
-  border-bottom-left-radius: 0;
+margin-bottom: -1px;
+border-bottom-right-radius: 0;
+border-bottom-left-radius: 0;
 }
 
 .form-signin input[type="password"] {
-  margin-bottom: 10px;
-  border-top-left-radius: 0;
-  border-top-right-radius: 0;
+margin-bottom: 10px;
+border-top-left-radius: 0;
+border-top-right-radius: 0;
 }
+
 
 
 /* slider section */
@@ -104,16 +108,17 @@ body {
 }
 
 /*Testimonials*/
-.testimonial-card .card-up {
-  height: 120px;
-  overflow: hidden;
-  border-top-left-radius: 0.25rem;
-  border-top-right-radius: 0.25rem;
+.card{
+    
+  border:none;
 }
-.testimonial-card .avatar {
-  width: 110px;
-  margin-top: -60px;
-  overflow: hidden;
-  border: 3px solid #fff;
-  border-radius: 50%;
+
+.user-content p{
+  margin-top:5px;
+  font-size:12px;
+}
+
+
+.ratings i{
+  color:blue;
 }

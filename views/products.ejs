@@ -1,25 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!--icon-->
     <link rel="shortcut icon" href="https://i.ibb.co/fkhvBg0/retail.png" />
-        <!--CSS-->
-        <link rel="stylesheet" href="resources/css/style.css">
-        <!--Bootstrap-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
+    <!--CSS-->
+    <link rel="stylesheet" href="resources/css/style.css">
+    <!--Bootstrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"></script>
     <title>Productos-Fieldshop</title>
 </head>
+
 <body>
-      <!--navbar-->
-      <div class="container">
+    <!--navbar-->
+    <div class="container">
         <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
             <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
                 <span class="logo">FieldShop</span>
             </a>
-    
+
             <div style="flex-grow: 1; display: flex; justify-content: center;">
                 <ul class="nav nav-pills">
                     <li><a href="/" class="nav-link px-2 link-secondary">Inicio</a></li>
@@ -28,242 +30,342 @@
                     <li><a href="/contact" class="nav-link px-2 link-secondary">Contacto</a></li>
                 </ul>
             </div>
-    
-            <!--
-            <button type="button" class="btn btn-outline-dark me-2" style="width: 150px; height: 38px; margin-right: 5px;" onclick="location.href='/login';">Iniciar sesion</button>
-            -->
-            <button type="button" class="btn btn-outline-dark" style="width: 150px; height: 38px; margin-right: 5px;" onclick="location.href='/register';">Registrarse</button>
-    
-            <div class="dropdown">
-                <button class="btn btn-dark dropdown-toggle" type="button" style="width: 150px; height: 38px;" data-bs-toggle="dropdown" aria-expanded="false">
-                    <% if (login) { %>                
-                        <p><%= name %></p>
-                    <%} else { %>
-                        <p><%= name %></p>
-                    <% } %>
-                </button>
-                <ul class="dropdown-menu">
-                    <% if (login) { %>       
-                        <li><a class="dropdown-item" href="logout">Cerrar sesión</a></li>
-                        <!--se crea el boton(de manera invisible) para que el usuario pueda comprar solo si ha iniciado sesion-->
-                        <button class="invisible-button" onclick="comprar()"></button>
-                    <%} else { %>
-                        <li><a class="dropdown-item" href="login">Ir a login</a></li>
-                    <% } %>
-                </ul>
-            </div>
-          </header>
-      </div>
 
-      <!--Products list-->
-      <h2 class="text-center Tittle-Home">Productos</h2>
-      <div id="productos"></div>
-      
-      <h2 class="text-center Tittle-Home">Carrito</h2>
-      <div id="carrito"></div>
-      
-      <h2 class="text-center Tittle-Home">Total</h2>
-      <div id="total"></div>
-      
-
-        <!-- si el usuario inicia sesion puede comprar, del contrario se le redirecciona al login -->
-        <div class="d-flex justify-content-center" id="botonCompra">
+            <!--Login y register usando la variable name definida en app.js-->
             <% if (login) { %>
-                <button onclick="comprar()" class="btn btn-dark">Comprar</button>
-            <% } else { %>
-                <button onclick="location.href='/login';" class="btn btn-dark">Inicia sesión aquí para poder realizar la compra</button>
-            <% } %>
-        </div>
-        
-    
-      <!--Carrito de compras con productos almacenados en un array-->
-      <script>
-            var productos = [
-                { nombre: 'Arroz grado 1 grano largo y ancho 1 kg', precio: 2429, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/655914-450-450?width=450&height=450&aspect=true'},
-                { nombre: 'Arroz grado 2 gran selección grano largo y ancho 1 kg', precio: 1829, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/459006-450-450?width=450&height=450&aspect=true' },
-                { nombre: 'Arroz Grado 2 Grano Largo y Laminado 1 kg', precio: 1589, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/453196-450-450?width=450&height=450&aspect=true' },
-                { nombre: 'Arroz Grado 1 Grano Largo y Ancho 1 kg', precio: 1899, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/638211-450-450?width=450&height=450&aspect=true' },
-                { nombre: 'Pasta Spaghetti N°5 400 g', precio: 1139, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/453113-450-450?width=450&height=450&aspect=true' },
-                { nombre: 'Pasta Espiral N°49 400 g', precio: 1139, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/453080-450-450?width=450&height=450&aspect=true' },
-                { nombre: 'Espirales al huevo 400 g', precio: 1289, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/680242-450-450?width=450&height=450&aspect=true' },
-                { nombre: 'Espirales Tr3s 400 g', precio: 1139, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/680377-450-450?width=450&height=450&aspect=true' },
-                { nombre: 'Pack 3 un. Bebidas Coca Cola + Sprite 3 L', precio: 8299, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/501515-450-450?width=450&height=450&aspect=true' },
-                { nombre: 'Bebida Canada Dry Ginger Ale 3 L', precio: 2799, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/412055-450-450?width=450&height=450&aspect=true' },
-                { nombre: 'Bebida Sprite 3 L', precio: 3099, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/643750-450-450?width=450&height=450&aspect=true' },
-                { nombre: 'Bebida Coca-Cola Original 3 L', precio: 3099, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/655907-450-450?width=450&height=450&aspect=true' }
-            ];
+                <button type="button" class="btn btn-outline-dark"
+                    style="width: 150px; height: 38px; margin-right: 5px;" onclick="location.href='/logout';">Cerrar
+                    sesión</button>
+                <%} else { %>
+                    <button type="button" class="btn btn-outline-dark"
+                        style="width: 150px; height: 38px; margin-right: 5px;"
+                        onclick="location.href='/register';">Registrarse</button>
+                    <% } %>
 
-            var carrito = [];
+                        <% if (login) { %>
+                            <button class="btn btn-dark" style="width: 150px; height: 38px; margin-right: 5px;">
+                                <p>
+                                    <%= name %>
+                                        </>
+                            </button>
+                            <%} else { %>
+                                <button class="btn btn-dark" style="width: 150px; height: 38px; margin-right: 5px;"
+                                    onclick="location.href='/login';">
+                                    <%= name %>
+                                </button>
+                                <% } %>
+        </header>
+    </div>
 
-            /**
-             * Muestra los productos en la página web.
-             * Cada producto se muestra en una tarjeta con su imagen, nombre y precio.
-             * Incluye un botón para agregar el producto al carrito de compras.
-             */
-            function mostrarProductos() {
-                var productosDiv = document.getElementById('productos');  
-                productosDiv.innerHTML = '';
-                productosDiv.className = 'd-flex justify-content-center align-items-center flex-wrap';               
-                productos.forEach(function(producto, index) {
-                    var productoDiv = document.createElement('div');
-                    productoDiv.className = 'card m-3';
-                    productoDiv.style = 'width: 18rem;';       
-                    productoDiv.innerHTML = 
-                        '<img src="' + producto.imagen + '" class="card-img-top" alt="' + producto.nombre + '">' +
-                        '<div class="card-body text-center">' +
+    <!--Products list-->
+    <h2 class="text-center Tittle-Home">Productos</h2>
+    <div id="productos"></div>
+
+    <h2 class="text-center Tittle-Home">Carrito</h2></br>
+    <div id="carrito"></div>
+
+    <h2 class="text-center Tittle-Home">Total</h2>
+    <div id="total"></div>
+
+    <!-- si el usuario inicia sesion puede comprar, del contrario se le redirecciona al login -->
+    <div class="d-flex justify-content-center" id="botonCompra">
+        <% if (login) { %>
+            <div class="container">
+                <div class="d-flex justify-content-center">
+                    <button onclick="comprar()" class="btn btn-dark">Continuar compra</button>
+                </div>
+
+                <form action="https://formspree.io/f/xjvnppva" method="POST">
+                    <hr class="my-4">
+                    <h4 class="mb-3">Dirección de Envío</h4>
+                    <div class="row g-3">
+                        <div class="col-sm-6">
+                            <label for="nombre" class="form-label">Nombre completo</label>
+                            <input type="text" class="form-control" id="nombre" name="nombre"
+                                placeholder="Ejemplo: Juan Pérez" required>
+                            <div class="invalid-feedback">
+                                Se requiere un nombre válido
+                            </div>
+                        </div>
+
+                        <div class="col-sm-6">
+                            <label for="apellido" class="form-label">Apellido</label>
+                            <input type="text" class="form-control" id="apellido" name="apellido"
+                                placeholder="Ejemplo: Pérez" required>
+                            <div class="invalid-feedback">
+                                Se requiere un apellido válido
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="usuario" class="form-label">Nombre de usuario</label>
+                            <div class="input-group has-validation">
+                                <span class="input-group-text">@</span>
+                                <input type="text" class="form-control" id="username" name="username"
+                                    placeholder="Username" value="<%= name %>" readonly>
+                                <div class="invalid-feedback">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="email" class="form-label">Correo electrónico</label>
+                            <input type="email" class="form-control" id="email" name="email"
+                                placeholder="correo@gmail.com" required>
+                            <div class="invalid-feedback">
+                                Ingrese una dirección de correo electrónico válida para recibir actualizaciones del
+                                envío
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="telefono" class="form-label">Telefono (opcional)</label>
+                            <input type="number" class="form-control" id="telefono" name="telefono"
+                                placeholder="+56(9)">
+                            <div class="invalid-feedback">
+                                Ingrese una telefono válido
+                            </div>
+                        </div>
+
+                        <div class="col-12">
+                            <label for="direccion" class="form-label">Dirección de envío</label>
+                            <input type="text" class="form-control" id="direccion" name="direccion"
+                                placeholder="Ejemplo: Calle 123 Av..." required>
+                            <div class="invalid-feedback">
+                                Por favor introduzca su dirección de envío
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <span class="input-group-text">Aporte una descripcion de su vivienda (opcional)</span>
+                            <textarea class="form-control" id="descripcion" name="descripcion"
+                                aria-label="With textarea"></textarea>
+                        </div>
+                    </div>
+
+                    <h4 class="mb-3">Metodo de pago</h4>
+                    <p>Seleccione el método de pago que utilizará. Esta imformación nos ayuda a realizar el cobro en el
+                        momento en que se llegue a su domicilio.</p>
+
+                    <div class="my-3">
+                        <div class="form-check">
+                            <input id="credito" name="paymentMethod" type="radio" class="form-check-input"
+                                value="credito" checked required>
+                            <label class="form-check-label" for="credit">Tarjeta de crédito</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="debito" name="paymentMethod" type="radio" class="form-check-input" value="debito"
+                                required>
+                            <label class="form-check-label" for="debit">Tarjeta de débito</label>
+                        </div>
+                        <div class="form-check">
+                            <input id="efectivo" name="paymentMethod" type="radio" class="form-check-input"
+                                value="efectivo" required>
+                            <label class="form-check-label" for="paypal">Efectivo</label>
+                        </div>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <div class="text-center">
+                        <h3>Productos a enviar:</h3>
+                        <div id="listaProductos" class="list-group mb-3 mx-auto" style="list-style-type: none;"></div>
+                        <div id="camposOcultos"></div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-success">Confirmar compra</button>
+                    </div>
+            </div>
+            </form>
+    </div>
+
+    <% } else { %>
+        <button onclick="location.href='/login';" class="btn btn-dark">Inicia sesión aquí para poder realizar la
+            compra</button>
+        <% } %>
+            </div>
+
+            <!--Carrito de compras con productos almacenados en un array-->
+            <script>
+                var productos = [
+                    { nombre: 'Arroz grado 1 grano largo y ancho 1kg', precio: 2429, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/655914-450-450?width=450&height=450&aspect=true' },
+                    { nombre: 'Arroz grado 2 grano largo y ancho 1kg', precio: 1829, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/459006-450-450?width=450&height=450&aspect=true' },
+                    { nombre: 'Arroz grado 2 grano largo y laminado 1kg', precio: 1589, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/453196-450-450?width=450&height=450&aspect=true' },
+                    { nombre: 'Arroz grado 1 grano largo y ancho 1kg', precio: 1899, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/638211-450-450?width=450&height=450&aspect=true' },
+                    { nombre: 'Pasta Spaghetti N°5 400g', precio: 1139, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/453113-450-450?width=450&height=450&aspect=true' },
+                    { nombre: 'Pasta Espiral N°49 400g', precio: 1139, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/453080-450-450?width=450&height=450&aspect=true' },
+                    { nombre: 'Espirales al huevo 400g', precio: 1289, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/680242-450-450?width=450&height=450&aspect=true' },
+                    { nombre: 'Pasta spirales Tr3s 400g', precio: 1139, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/680377-450-450?width=450&height=450&aspect=true' },
+                    { nombre: 'Pack 3un. Coca Cola + Sprite 3L', precio: 8299, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/501515-450-450?width=450&height=450&aspect=true' },
+                    { nombre: 'Bebida canada dry ginger ale 3L', precio: 2799, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/412055-450-450?width=450&height=450&aspect=true' },
+                    { nombre: 'Bebida sprite limon3L', precio: 3099, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/643750-450-450?width=450&height=450&aspect=true' },
+                    { nombre: 'Bebida Coca-Cola original 3L', precio: 3099, imagen: 'https://jumbo.vtexassets.com/arquivos/ids/655907-450-450?width=450&height=450&aspect=true' }
+                ];
+
+                var carrito = [];
+
+                /**
+                 * Muestra los productos en la página web.
+                 * Cada producto se muestra en una tarjeta con su imagen, nombre y precio.
+                 * Incluye un botón para agregar el producto al carrito de compras.
+                 */
+
+                function mostrarProductos() {
+                    var productosDiv = document.getElementById('productos');
+                    productosDiv.innerHTML = '';
+                    productosDiv.className = 'row row-cols-1 row-cols-md-4 g-5';
+                    productos.forEach(function (producto, index) {
+                        var productoDiv = document.createElement('div');
+                        productoDiv.className = 'col';
+                        var cardDiv = document.createElement('div');
+                        cardDiv.className = 'card h-100';
+                        cardDiv.innerHTML =
+                            '<img src="' + producto.imagen + '" class="card-img-top" alt="' + producto.nombre + '">' +
+                            '<div class="card-body text-center">' +
                             '<h5 class="card-title">' + producto.nombre + '</h5>' +
                             '<p class="card-text">Precio: $' + producto.precio + '</p>' +
-                            '<button class="btn btn-warning" onclick="agregarAlCarrito(' + index + ')">Agregar al carrito</button>' +
-                        '</div>';
-                    productosDiv.appendChild(productoDiv);
-                });
-            }
-
-            //Agrega el producto al carrito
-            function agregarAlCarrito(index) {
-                var producto = productos[index];
-                // Busca el producto en el carrito para ver si ya existe.
-                var productoEnCarrito = carrito.find(p => p.nombre === producto.nombre);
-                if (productoEnCarrito) {
-                    productoEnCarrito.cantidad++;
-                } else {
-                    producto.cantidad = 1;
-                    carrito.push(producto);
-                }
-                mostrarCarrito();
-                calcularTotal();
-            }
-      
-            //Elimina el producto del carrito
-            function eliminarDelCarrito(index) {
-                carrito.splice(index, 1);
-                mostrarCarrito();
-                calcularTotal();
-            }
-        
-            //Si se agrega, modifica la cantidad o se elimina un producto del carrito, esta funcion lo actualiza
-            function actualizarCantidad(index, cantidad) {
-                carrito[index].cantidad = cantidad;
-                mostrarCarrito();
-                calcularTotal();
-            }
-      
-            //Muestra el carrito con los productos agregados o vacio si no contiene productos
-            function mostrarCarrito() {
-                var carritoDiv = document.getElementById('carrito');
-                carritoDiv.innerHTML = '';
-                carritoDiv.className = 'd-flex justify-content-center align-items-center flex-wrap';
-                carrito.forEach(function(producto, index) {
-                    var productoDiv = document.createElement('div');
-                    productoDiv.className = 'card m-3';
-                    productoDiv.style = 'width: 18rem;';
-                    productoDiv.innerHTML = 
-                        '<img src="' + producto.imagen + '" class="card-img-top" alt="' + producto.nombre + '">' +
-                        '<div class="card-body">' +
-                            '<h5 class="card-title">' + producto.nombre + '</h5>' +
-                            '<p class="card-text">Precio: ' + producto.precio + '</p>' +
-                            '<input type="number" class="form-control" value="' + producto.cantidad + '" min="1" onchange="actualizarCantidad(' + index + ', this.value)" />' +
-                            '<button class="btn btn-danger mt-2" onclick="eliminarDelCarrito(' + index + ')">Eliminar del carrito</button>' +
-                        '</div>';
-                    carritoDiv.appendChild(productoDiv);
-                });
-            }
-
-
-            //Calcula el total del precio de los productos en el carrito
-            function calcularTotal() {
-                var total = 0;
-                carrito.forEach(function(producto) {
-                    total += producto.precio * producto.cantidad;
-                });
-
-                var totalDiv = document.getElementById('total');
-                totalDiv.innerHTML = '<h5 class="text-center">Total a pagar: $' + total + '</h5>';
-            }
-
-            mostrarCarrito();
-            calcularTotal();
-
-            function comprar() {
-                if (carrito.length > 0) {
-                    // Busca el formulario existente
-                    var formulario = document.getElementById('formularioCompra');
-
-                    // Si el formulario no existe, lo crea
-                    if (!formulario) {
-                        formulario = document.createElement('form');
-                        formulario.id = 'formularioCompra';
-                        document.body.appendChild(formulario);
-                    }
-
-                    // Limpia el formulario
-                    formulario.innerHTML = '';
-
-                    // Añade los campos al formulario
-                    formulario.innerHTML = `
-                    <div class="container">
-                    <form style="max-width: 400px;" class="mx-auto">
-                        <div class="mb-3">
-                            <label for="nombre" class="form-label">Nombre:</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre" value="<%= name %>">
-                        </div>
-                        <div class="mb-3">
-                            <label for="ciudad" class="form-label">Ciudad:</label>
-                            <input type="text" class="form-control" id="ciudad" name="ciudad">
-                        </div>
-                        <div class="mb-3">
-                            <label for="direccion" class="form-label">Dirección:</label>
-                            <input type="text" class="form-control" id="direccion" name="direccion">
-                        </div>
-                        <div class="mb-3">
-                            <label for="correo" class="form-label">Correo:</label>
-                            <input type="email" class="form-control" id="correo" name="correo">
-                        </div>
-                        <div class="text-center">
-                        <h3>Productos a enviar:</h3>
-                        <ul id="listaProductos" class="list-group mb-3 mx-auto" style="list-style-type: none;"></ul>
-                        </div>
-                        <div class="d-flex justify-content-center">
-                            <button type="submit" class="btn btn-primary">Enviar</button>
-                        </div>
-                    </form>
-                    </div>
-                    `;
-
-                    // Añade los productos del carrito a la lista
-                    var listaProductos = document.getElementById('listaProductos');
-                    carrito.forEach(function(producto) {
-                        var productoLi = document.createElement('li');
-                        productoLi.textContent = producto.nombre + ' - $' + producto.precio + ' Cantidad: ' + producto.cantidad;
-                        listaProductos.appendChild(productoLi);
+                            '<button class="btn btn-warning text-white" onclick="agregarAlCarrito(' + index + ')">Agregar al carrito</button>' +
+                            '</div>';
+                        productoDiv.appendChild(cardDiv);
+                        productosDiv.appendChild(productoDiv);
                     });
-                    // Encuentra el div llamado:"botonCompra" en el html y añade el formulario debajo de este
-                    var divCompra = document.getElementById('botonCompra');
-                    divCompra.parentNode.insertBefore(formulario, divCompra.nextSibling);
-                    // alert('Compra realizada con éxito!');
-                    carrito = []; // Vacía el carrito
+                }
+
+                //Agrega el producto al carrito
+                function agregarAlCarrito(index) {
+                    var producto = productos[index];
+                    // Busca el producto en el carrito para ver si ya existe.
+                    var productoEnCarrito = carrito.find(p => p.nombre === producto.nombre);
+                    if (productoEnCarrito) {
+                        productoEnCarrito.cantidad++;
+                    } else {
+                        producto.cantidad = 1;
+                        carrito.push(producto);
+                    }
                     mostrarCarrito();
                     calcularTotal();
-                } else {
-                    alert('Tu carrito está vacío');
                 }
-            }
+
+                //Elimina el producto del carrito
+                function eliminarDelCarrito(index) {
+                    carrito.splice(index, 1);
+                    mostrarCarrito();
+                    calcularTotal();
+                }
+
+                //Si se agrega, modifica la cantidad o se elimina un producto del carrito, esta funcion lo actualiza
+                function actualizarCantidad(index, cantidad) {
+                    carrito[index].cantidad = cantidad;
+                    mostrarCarrito();
+                    calcularTotal();
+                }
+
+                //Muestra el carrito con los productos agregados o vacio si no contiene productos
+                function mostrarCarrito() {
+                    var carritoDiv = document.getElementById('carrito');
+                    carritoDiv.innerHTML = '';
+                    carritoDiv.className = 'row row-cols-1 row-cols-md-4 g-4';
+                    carrito.forEach(function (producto, index) {
+                        var productoDiv = document.createElement('div');
+                        productoDiv.className = 'col'; 
+                        var cardDiv = document.createElement('div');
+                        cardDiv.className = 'card h-100';
+                        cardDiv.innerHTML =
+                            '<img src="' + producto.imagen + '" class="card-img-top" alt="' + producto.nombre + '">' +
+                            '<div class="card-body text-center">' +
+                            '<h5 class="card-title">' + producto.nombre + '</h5>' +
+                            '<p class="card-text">Precio: ' + producto.precio + '</p>' +
+                            '<div class="d-flex justify-content-center align-items-center mb-2">' +
+                            '<button class="btn btn-primary mr-2" onclick="subirCantidad(' + index + ')">+</button>' +
+                            '<span class="mx-2">' + producto.cantidad + '</span>' +
+                            '<button class="btn btn-primary ml-2" onclick="bajarCantidad(' + index + ')">-</button>' +
+                            '</div>' +
+                            '<button class="btn btn-danger mt-2" onclick="eliminarDelCarrito(' + index + ')">Eliminar del carrito</button>' +
+                            '</div>';
+                        productoDiv.appendChild(cardDiv);
+                        carritoDiv.appendChild(productoDiv);
+                    });
+                }
+
+                //sube la cantidad del producto en 1 cada vez que se presione el boton "+"
+                function subirCantidad(index) {
+                    carrito[index].cantidad++;
+                    mostrarCarrito();
+                    calcularTotal();
+                }
+
+                //baja la cantidad del producto en 1 cada vez que se presione el boton "-" pero no permite que la cantidad baje de 1
+                function bajarCantidad(index) {
+                    if (carrito[index].cantidad > 1) {
+                        carrito[index].cantidad--;
+                    } else {
+                        alert('La cantidad mínima para comprar es 1');
+                    }
+                    mostrarCarrito();
+                    calcularTotal();
+                }
+
+                //Calcula el total del precio de los productos en el carrito
+                function calcularTotal() {
+                    var total = 0;
+                    carrito.forEach(function (producto) {
+                        total += producto.precio * producto.cantidad;
+                    });
+                    var totalDiv = document.getElementById('total');
+                    totalDiv.innerHTML = '<h5 class="text-center">Total a pagar: $' + total + '</h5>';
+                }
+
+                mostrarCarrito();
+                calcularTotal();
+ 
+                function comprar() {
+                    if (carrito.length > 0) {
+                        // Busca el contenedor de los campos ocultos y la lista de productos
+                        var camposOcultos = document.getElementById('camposOcultos');
+                        var listaProductos = document.getElementById('listaProductos');
+                        // Limpia los campos ocultos y la lista de productos
+                        camposOcultos.innerHTML = '';
+                        listaProductos.innerHTML = '';
+                        // Crea un campo oculto y un elemento de lista para cada producto en el carrito
+                        carrito.forEach(function (producto, index) {
+                            var campoOculto = document.createElement('input');
+                            campoOculto.type = 'hidden';
+                            campoOculto.name = 'producto' + index;
+                            campoOculto.value = producto.nombre + ' - $' + producto.precio + ' Cantidad: ' + producto.cantidad;
+                            camposOcultos.appendChild(campoOculto);
+
+                            var productoLi = document.createElement('li');
+                            productoLi.textContent = producto.nombre + ' - $' + producto.precio + ' Cantidad: ' + producto.cantidad;
+                            listaProductos.appendChild(productoLi);
+                        });
+
+                        // Encuentra el div llamado:"botonCompra" en el html y añade el formulario debajo de este
+                        var divCompra = document.getElementById('botonCompra');
+                        divCompra.parentNode.insertBefore(formulario, divCompra.nextSibling);
+
+                        carrito = []; // Vacía el carrito
+                        mostrarCarrito();
+                        calcularTotal();
+                    } else {
+                        alert('Tu carrito está vacío');
+                    }
+                }
+
+                mostrarProductos();
+
+            </script>
 
 
-
-          mostrarProductos();
-      </script>
-      
-
-      <!--footer-->
+            <!--footer-->
             <footer class="py-3 my-4" style="background-color: #2c2c2c; color: white; width: 100%;">
-              <ul class="nav justify-content-center border-bottom pb-3 mb-3">
-                <li class="nav-item"><a href="/" class="nav-link px-2 text-white">Inicio</a></li>
-                <li class="nav-item"><a href="/products" class="nav-link px-2 text-white">Productos</a></li>
-                <li class="nav-item"><a href="/us" class="nav-link px-2 text-white">Nosotros</a></li>
-                <li class="nav-item"><a href="/contact" class="nav-link px-2 text-white">Contacto</a></li>
-              </ul>
-              <p class="text-center text-white">© 2024 Fieldshop, Inc</p>
+                <ul class="nav justify-content-center border-bottom pb-3 mb-3">
+                    <li class="nav-item"><a href="/" class="nav-link px-2 text-white">Inicio</a></li>
+                    <li class="nav-item"><a href="/products" class="nav-link px-2 text-white">Productos</a></li>
+                    <li class="nav-item"><a href="/us" class="nav-link px-2 text-white">Nosotros</a></li>
+                    <li class="nav-item"><a href="/contact" class="nav-link px-2 text-white">Contacto</a></li>
+                </ul>
+                <p class="text-center text-white">© 2024 Fieldshop, Inc</p>
             </footer>
 </body>
+
 </html>

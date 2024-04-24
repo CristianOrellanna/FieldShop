@@ -46,7 +46,6 @@ app.get('/register', (req, res) => {
 })
 
 //Metodos POST -> register, auth, index, products, us y contact
-
 /*
 *Toma los datos del formulario 'app.get('/register')...', luego hashea la contraseña para almacenarla
 *encriptada y de manera segura, busca en la DB el rol que solicita el usuario y si lo encuentra
@@ -62,7 +61,6 @@ app.post('/register', async (req, res) => {
     const comuna = req.body.comuna;
     const direccion = req.body.direccion;
     let passwordHash = await bcryptjs.hash(pass, 8);
-
     // Como primer paso, se debe encontrar el IdRol correspondiente al nombre del rol
     connection.query('SELECT IdRol FROM Roles WHERE RolName = ?', [rol], async (error, results) => {
         if (error) {
@@ -110,9 +108,7 @@ app.post('/register', async (req, res) => {
     });
 });
 
-/*
-*Autentica al usuario, comparando tanto el user con la contraseña hasheada almacenada en la DB
-*/
+//Autentica al usuario, comparando tanto el user con la contraseña hasheada almacenada en la DB
 app.post('/auth', async (req, res) => {
     const user = req.body.user;
     const pass = req.body.pass;

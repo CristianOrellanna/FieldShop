@@ -29,29 +29,23 @@
                 </ul>
             </div>
     
-            <!--
-            <button type="button" class="btn btn-outline-dark me-2" style="width: 150px; height: 38px; margin-right: 5px;" onclick="location.href='/login';">Iniciar sesion</button>
-            -->
-            <button type="button" class="btn btn-outline-dark" style="width: 150px; height: 38px; margin-right: 5px;" onclick="location.href='/register';">Registrarse</button>
-    
-            <div class="dropdown">
-                <button class="btn btn-dark dropdown-toggle" type="button" style="width: 150px; height: 38px;" data-bs-toggle="dropdown" aria-expanded="false">
-                    <% if (login) { %>                
-                        <p><%= name %></p>
-                    <%} else { %>
-                        <p><%= name %></p>
-                    <% } %>
-                </button>
-                <ul class="dropdown-menu">
-                    <% if (login) { %>                
-                        <li><a class="dropdown-item" href="logout">Cerrar sesión</a></li>
-                    <%} else { %>
-                        <li><a class="dropdown-item" href="login">Ir a login</a></li>
-                    <% } %>
-                </ul>
-            </div>
+            <!--Login y register usando la variable name definida en app.js-->
+            <% if (login) { %>                
+              <button type="button" class="btn btn-outline-dark" style="width: 150px; height: 38px; margin-right: 5px;" onclick="location.href='/logout';">Cerrar sesión</button>
+          <%} else { %>
+              <button type="button" class="btn btn-outline-dark" style="width: 150px; height: 38px; margin-right: 5px;" onclick="location.href='/register';">Registrarse</button>
+          <% } %>
+          
+          <% if (login) { %>                
+              <button class="btn btn-dark" style="width: 150px; height: 38px; margin-right: 5px;">
+                  <p><%= name %></>
+              </button>
+          <%} else { %>
+              <button class="btn btn-dark" style="width: 150px; height: 38px; margin-right: 5px;" onclick="location.href='/login';"><%= name %></button>
+          <% } %>
+
           </header>
-      </div>
+          </div>
 
       <!--contact-->
       <section class="bg-light py-3 py-md-5">
@@ -128,9 +122,9 @@
                 </div>
               </div>
             </div>
+            
             <div class="col-12 col-lg-6">
               <div class="bg-white border rounded shadow-sm overflow-hidden">
-
                 <form action="mailto:fieldshopstore@gmail.com" method="post" enctype="text/plain">
                   <div class="row gy-4 gy-xl-5 p-4 p-xl-5">
                     <div class="col-12">

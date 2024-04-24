@@ -8,11 +8,6 @@ body {
   background-color:#eee;
 }
 
-/*button invisible for user*/
-.invisible-button {
-  display: none;
-}
-
 /*Tittle homepage*/
 .Tittle-Home{
   font-family: "PT Serif", serif;
@@ -62,8 +57,6 @@ margin-bottom: 10px;
 border-top-left-radius: 0;
 border-top-right-radius: 0;
 }
-
-
 
 /* slider section */
 .slider_section {
@@ -117,7 +110,6 @@ border-top-right-radius: 0;
   margin-top:5px;
   font-size:12px;
 }
-
 
 .ratings i{
   color:blue;

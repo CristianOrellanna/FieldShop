@@ -114,3 +114,24 @@ border-top-right-radius: 0;
 .ratings i{
   color:blue;
 }
+
+
+#listaProductos {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+  overflow: hidden;
+}
+
+#listaProductos .list-group-item {
+  border: none;
+  padding: 15px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f9f9f9;
+}
+
+#listaProductos .list-group-item:nth-child(even) {
+  background-color: #f2f2f2;
+}

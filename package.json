@@ -4,8 +4,8 @@
   "description": "final project to graduate from a computer science degree",
   "main": "index.js",
   "scripts": {
-    "test": "npm test",
-    "start": "node app.ejs"
+    "test": "jest",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",
@@ -24,5 +24,9 @@
     "express": "^4.18.2",
     "express-session": "^1.18.0",
     "mysql2": "^3.9.1"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.0.0"
   }
 }

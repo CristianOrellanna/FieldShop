@@ -46,7 +46,7 @@
                             <button class="btn btn-dark" style="width: 150px; height: 38px; margin-right: 5px;">
                                 <p>
                                     <%= name %>
-                                        </>
+                                </p>
                             </button>
                             <%} else { %>
                                 <button class="btn btn-dark" style="width: 150px; height: 38px; margin-right: 5px;"
@@ -57,15 +57,42 @@
         </header>
     </div>
 
-    <!--Products list-->
-    <h2 class="text-center Tittle-Home">Productos</h2>
-    <div id="productos"></div>
+    <!--variable "esAdmin" verifica si el usuario es admin y solo a el le muestra este contenido-->
+    <div class="formularioAdmin">
+        <% if (esAdmin) { %>
 
-    <h2 class="text-center Tittle-Home">Carrito</h2></br>
-    <div id="carrito"></div>
+            <div class="px-4 py-5 my-5 text-center">
+                <img class="d-block mx-auto mb-4" src="https://i.ibb.co/4pGFY1Y/administracion.png" alt="" width="72"
+                    height="70">
+                <h1 class="display-5 fw-bold">Hola Admin!</h1>
+                <div class="col-lg-6 mx-auto">
+                    <p class="lead mb-4">Tienes permisos especiales, solo tú puedes ver este contenido. Podrás observar
+                        un formulario en el cual puedes ingresar los cambios que deseas que se realicen en los
+                        productos, tales como la modificación de precios, nombres, etc. Al igual que los productos que
+                        deseas agregar y/o eliminar.</p>
+                </div>
+            </div>
 
-    <h2 class="text-center Tittle-Home">Total</h2>
-    <div id="total"></div>
+            <%} else { %>
+
+                <% } %>
+    </div>
+
+    <!--Se muestran los productos, carrito y total de las funciones especificadas en el script del final-->
+    <div class="container">
+        <h2 class="text-center Tittle-Home">Productos</h2></br></br>
+        <div id="productos"></div>
+    </div>
+
+    <div class="container">
+        <h2 class="text-center Tittle-Home">Carrito</h2></br></br>
+        <div id="carrito"></div>
+    </div>
+
+    <div class="container">
+        <h2 class="text-center Tittle-Home">Total</h2>
+        <div id="total"></div>
+    </div>
 
     <!-- si el usuario inicia sesion puede comprar, del contrario se le redirecciona al login -->
     <div class="d-flex justify-content-center" id="botonCompra">
@@ -74,112 +101,327 @@
                 <div class="d-flex justify-content-center">
                     <button onclick="comprar()" class="btn btn-dark">Continuar compra</button>
                 </div>
-
-                <form action="https://formspree.io/f/xjvnppva" method="POST">
+                <% if (esAdmin) { %>
+                    <!-- Formulario para administradores -->
                     <hr class="my-4">
-                    <h4 class="mb-3">Dirección de Envío</h4>
-                    <div class="row g-3">
-                        <div class="col-sm-6">
-                            <label for="nombre" class="form-label">Nombre completo</label>
-                            <input type="text" class="form-control" id="nombre" name="nombre"
-                                placeholder="Ejemplo: Juan Pérez" required>
-                            <div class="invalid-feedback">
-                                Se requiere un nombre válido
+                    <h2 class="text-center Tittle-Home">Gestion de productos por un Administrador</h2>
+                    <hr class="my-4">
+                    <div class="container">
+                        <!-- Sección de agregar productos -->
+                        <div class="mb-4">
+                            <form action="https://formspree.io/f/xjvnppva" method="POST">
+                            <div class="d-flex justify-content-center">
+                                <h3>Agregar nuevos productos</h3>
+                            </div><br>
+                            <div class="row">
+                                <div class="col">
+                                        <!-- primer producto a agregar -->
+                                        <div class="mb-3">
+                                            <label for="nombrePrimerProductoAgregar" class="form-label">Nombre del primer producto a
+                                                agregar</label>
+                                            <input type="text" class="form-control" id="nombrePrimerProductoAgregar"
+                                                name="nombrePrimerProductoAgregar">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="precioPrimerProductoAgregar" class="form-label">Precio del producto</label>
+                                            <input type="number" class="form-control" id="precioPrimerProductoAgregar"
+                                                name="precioPrimerProductoAgregar">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="imagenPrimerProductoAgregar" class="form-label">Link de la imagen del
+                                                producto</label>
+                                            <input type="text" class="form-control" id="imagenPrimerProductoAgregar"
+                                                name="imagenPrimerProductoAgregar">
+                                        </div>
+                                </div>
+                                <div class="col">
+                                        <!-- segundo producto a agregar -->
+                                        <div class="mb-3">
+                                            <label for="nombreSegundoProductoAgregar" class="form-label">Nombre del segundo producto a
+                                                agregar</label>
+                                            <input type="text" class="form-control" id="nombreSegundoProductoAgregar"
+                                                name="nombreSegundoProductoAgregar">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="precioSegundoProductoAgregar" class="form-label">Precio del producto</label>
+                                            <input type="number" class="form-control" id="precioSegundoProductoAgregar"
+                                                name="precioSegundoProductoAgregar">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="imagenSegundoProductoAgregar" class="form-label">Link de la imagen del
+                                                producto</label>
+                                            <input type="text" class="form-control" id="imagenSegundoProductoAgregar"
+                                                name="imagenSegundoProductoAgregar">
+                                        </div>
+                                </div>
+                                <div class="col">
+                                        <!-- tercer producto a agregar -->
+                                        <div class="mb-3">
+                                            <label for="nombreTercerProductoAgregar" class="form-label">Nombre del tercer producto a
+                                                agregar</label>
+                                            <input type="text" class="form-control" id="nombreTercerProductoAgregar"
+                                                name="nombreTercerProductoAgregar">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="precioTercerProductoAgregar" class="form-label">Precio del producto</label>
+                                            <input type="number" class="form-control" id="precioTercerProductoAgregar"
+                                                name="precioTercerProductoAgregar">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="imagenTercerProductoAgregar" class="form-label">Link de la imagen del
+                                                producto</label>
+                                            <input type="text" class="form-control" id="imagenTercerProductoAgregar"
+                                                name="imagenTercerProductoAgregar">
+                                        </div>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-success">Enviar agregacion del
+                                        producto</button>
+                                </div>                    
                             </div>
+                        </form>
                         </div>
 
-                        <div class="col-sm-6">
-                            <label for="apellido" class="form-label">Apellido</label>
-                            <input type="text" class="form-control" id="apellido" name="apellido"
-                                placeholder="Ejemplo: Pérez" required>
-                            <div class="invalid-feedback">
-                                Se requiere un apellido válido
+                        <!-- Sección de modificar productos -->
+                        <div class="mb-4">
+                            <form action="https://formspree.io/f/xjvnppva" method="POST">
+                            <hr class="my-4">
+                            <div class="d-flex justify-content-center">
+                                <h3>Modificar productos</h3>
+                            </div><br>
+                            <div class="row">
+                                <div class="col">
+                                        <!-- primer producto a modificar -->
+                                        <div class="mb-3">
+                                            <label for="nombrePrimerProductoModificar" class="form-label">Nombre del primer producto a
+                                                modificar</label>
+                                            <input type="text" class="form-control" id="nombrePrimerProductoModificar"
+                                                name="nombrePrimerProductoModificar">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="precioPrimerProductoModificar" class="form-label">Nuevo precio del
+                                                producto</label>
+                                            <input type="number" class="form-control" id="precioPrimerProductoModificar"
+                                                name="precioPrimerProductoModificar">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="imagenPrimerProductoAgregar" class="form-label">Link de la nueva imagen del
+                                                producto</label>
+                                            <input type="text" class="form-control" id="imagenProducto"
+                                                name="imagenPrimerProductoAgregar">
+                                        </div>
+                                </div>
+                                <div class="col">
+                                        <!-- segundo producto a modificar -->
+                                        <div class="mb-3">
+                                            <label for="nombreSegundoProductoModificar" class="form-label">Nombre del segundo producto a
+                                                modificar</label>
+                                            <input type="text" class="form-control" id="nombreSegundoProductoModificar"
+                                                name="nombreSegundoProductoModificar">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="precioSegundoProductoModificar" class="form-label">Nuevo precio del
+                                                producto</label>
+                                            <input type="number" class="form-control" id="precioSegundoProductoModificar"
+                                                name="precioSegundoProductoModificar">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="imagenSegundoProductoModificar" class="form-label">Link de la nueva imagen del
+                                                producto</label>
+                                            <input type="text" class="form-control" id="imagenSegundoProductoModificar"
+                                                name="imagenSegundoProductoModificar">
+                                        </div>
+                                </div>
+                                <div class="col">
+                                        <!-- tercer producto a modificar -->
+                                        <div class="mb-3">
+                                            <label for="nombreTercerProductoModificar" class="form-label">Nombre del tercer producto a
+                                                modificar</label>
+                                            <input type="text" class="form-control" id="nombreTercerProductoModificar"
+                                                name="nombreTercerProductoModificar">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="precioTercerProductoModificar" class="form-label">Nuevo precio del
+                                                producto</label>
+                                            <input type="number" class="form-control" id="precioTercerProductoModificar"
+                                                name="precioTercerProductoModificar">
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="imagenTercerProductoModificar" class="form-label">Link de la nueva imagen del
+                                                producto</label>
+                                            <input type="text" class="form-control" id="imagenTercerProductoModificar"
+                                                name="imagenTercerProductoModificar">
+                                        </div>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-warning text-white">Enviar modificacion del
+                                        producto</button>
+                                </div>                               
                             </div>
+                        </form>
                         </div>
 
-                        <div class="col-12">
-                            <label for="usuario" class="form-label">Nombre de usuario</label>
-                            <div class="input-group has-validation">
-                                <span class="input-group-text">@</span>
-                                <input type="text" class="form-control" id="username" name="username"
-                                    placeholder="Username" value="<%= name %>" readonly>
-                                <div class="invalid-feedback">
+                        <!-- Sección de eliminar productos -->
+                        <div class="mb-4">
+                            <form action="https://formspree.io/f/xjvnppva" method="POST">
+                            <hr class="my-4">
+                            <div class="d-flex justify-content-center">
+                                <h3>Eliminar productos</h3>
+                            </div><br>
+                            <div class="row">
+                                <div class="col">
+                                        <!-- primer producto a eliminar -->
+                                        <div class="mb-3">
+                                            <label for="nombrePrimerProductoEliminar" class="form-label">Nombre del primer producto a
+                                                eliminar</label>
+                                            <input type="text" class="form-control" id="nombrePrimerProductoEliminar"
+                                                name="nombrePrimerProductoEliminar">
+                                        </div>
+                                </div>
+                                <div class="col">
+                                        <!-- segundo producto a eliminar -->
+                                        <div class="mb-3">
+                                            <label for="nombreSegundoProductoEliminar" class="form-label">Nombre del segundo producto a
+                                                eliminar</label>
+                                            <input type="text" class="form-control" id="nombreSegundoProductoEliminar"
+                                                name="nombreSegundoProductoEliminar">
+                                        </div>
+                                </div>
+                                <div class="col">
+                                        <!-- tercer producto a eliminar -->
+                                        <div class="mb-3">
+                                            <label for="nombreTercerProductoEliminar" class="form-label">Nombre del tercer producto a
+                                                eliminar</label>
+                                            <input type="text" class="form-control" id="nombreTercerProductoEliminar"
+                                                name="nombreTercerProductoEliminar">
+                                        </div>
+                                </div>
+                                <div class="d-flex justify-content-center">
+                                    <button type="submit" class="btn btn-danger">Enviar eliminacion del
+                                        producto</button>
+                                </div>
+                            </div>  
+                        </div>
+                    </form>
+                    </div>
+
+                    <hr class="my-4">
+
+                    <% } else { %>
+                        <!-- Formulario para usuarios comunes -->
+                        <!-- No se mostrará si esAdmin es true -->
+                        <form action="https://formspree.io/f/xjvnppva" method="POST">
+                            <hr class="my-4">
+                            <h4 class="mb-3">Dirección de Envío</h4>
+                            <div class="row g-3">
+                                <div class="col-sm-6">
+                                    <label for="nombre" class="form-label">Nombre completo</label>
+                                    <input type="text" class="form-control" id="nombre" name="nombre"
+                                        placeholder="Ejemplo: Juan Pérez" required>
+                                    <div class="invalid-feedback">
+                                        Se requiere un nombre válido
+                                    </div>
+                                </div>
+
+                                <div class="col-sm-6">
+                                    <label for="apellido" class="form-label">Apellido</label>
+                                    <input type="text" class="form-control" id="apellido" name="apellido"
+                                        placeholder="Ejemplo: Pérez" required>
+                                    <div class="invalid-feedback">
+                                        Se requiere un apellido válido
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="usuario" class="form-label">Nombre de usuario</label>
+                                    <div class="input-group has-validation">
+                                        <span class="input-group-text">@</span>
+                                        <input type="text" class="form-control" id="username" name="username"
+                                            placeholder="Username" value="<%= name %>" readonly>
+                                        <div class="invalid-feedback">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="email" class="form-label">Correo electrónico</label>
+                                    <input type="email" class="form-control" id="email" name="email"
+                                        placeholder="correo@gmail.com" required>
+                                    <div class="invalid-feedback">
+                                        Ingrese una dirección de correo electrónico válida para recibir actualizaciones
+                                        del
+                                        envío
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="telefono" class="form-label">Telefono (opcional)</label>
+                                    <input type="number" class="form-control" id="telefono" name="telefono"
+                                        placeholder="+56(9)">
+                                    <div class="invalid-feedback">
+                                        Ingrese una telefono válido
+                                    </div>
+                                </div>
+
+                                <div class="col-12">
+                                    <label for="direccion" class="form-label">Dirección de envío</label>
+                                    <input type="text" class="form-control" id="direccion" name="direccion"
+                                        placeholder="Ejemplo: Calle 123 Av..." required>
+                                    <div class="invalid-feedback">
+                                        Por favor introduzca su dirección de envío
+                                    </div>
+                                </div>
+
+                                <div class="input-group">
+                                    <span class="input-group-text">Aporte una descripcion de su vivienda
+                                        (opcional)</span>
+                                    <textarea class="form-control" id="descripcion" name="descripcion"
+                                        aria-label="With textarea"></textarea>
                                 </div>
                             </div>
-                        </div>
 
-                        <div class="col-12">
-                            <label for="email" class="form-label">Correo electrónico</label>
-                            <input type="email" class="form-control" id="email" name="email"
-                                placeholder="correo@gmail.com" required>
-                            <div class="invalid-feedback">
-                                Ingrese una dirección de correo electrónico válida para recibir actualizaciones del
-                                envío
+                            <h4 class="mb-3">Metodo de pago</h4>
+                            <p>Seleccione el método de pago que utilizará. Esta imformación nos ayuda a realizar el
+                                cobro en el
+                                momento en que se llegue a su domicilio.</p>
+
+                            <div class="my-3">
+                                <div class="form-check">
+                                    <input id="credito" name="paymentMethod" type="radio" class="form-check-input"
+                                        value="credito" checked required>
+                                    <label class="form-check-label" for="credit">Tarjeta de crédito</label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="debito" name="paymentMethod" type="radio" class="form-check-input"
+                                        value="debito" required>
+                                    <label class="form-check-label" for="debit">Tarjeta de débito</label>
+                                </div>
+                                <div class="form-check">
+                                    <input id="efectivo" name="paymentMethod" type="radio" class="form-check-input"
+                                        value="efectivo" required>
+                                    <label class="form-check-label" for="paypal">Efectivo</label>
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-12">
-                            <label for="telefono" class="form-label">Telefono (opcional)</label>
-                            <input type="number" class="form-control" id="telefono" name="telefono"
-                                placeholder="+56(9)">
-                            <div class="invalid-feedback">
-                                Ingrese una telefono válido
+                            <hr class="my-4">
+
+                            <div class="text-center" style="font-family: Arial, sans-serif; color: #333;">
+                                <h3 style="font-size: 1.5em; font-weight: bold; margin-bottom: 20px;">Productos a
+                                    enviar:</h3>
+                                <div id="listaProductos" class="list-group mb-3 mx-auto"
+                                    style="list-style-type: none; max-width: 600px; margin: auto;"></div>
+                                <div id="camposOcultos"></div>
                             </div>
-                        </div>
 
-                        <div class="col-12">
-                            <label for="direccion" class="form-label">Dirección de envío</label>
-                            <input type="text" class="form-control" id="direccion" name="direccion"
-                                placeholder="Ejemplo: Calle 123 Av..." required>
-                            <div class="invalid-feedback">
-                                Por favor introduzca su dirección de envío
+                            <div class="d-flex justify-content-center">
+                                <button type="submit" class="btn btn-success">Confirmar compra</button>
                             </div>
-                        </div>
-
-                        <div class="input-group">
-                            <span class="input-group-text">Aporte una descripcion de su vivienda (opcional)</span>
-                            <textarea class="form-control" id="descripcion" name="descripcion"
-                                aria-label="With textarea"></textarea>
-                        </div>
-                    </div>
-
-                    <h4 class="mb-3">Metodo de pago</h4>
-                    <p>Seleccione el método de pago que utilizará. Esta imformación nos ayuda a realizar el cobro en el
-                        momento en que se llegue a su domicilio.</p>
-
-                    <div class="my-3">
-                        <div class="form-check">
-                            <input id="credito" name="paymentMethod" type="radio" class="form-check-input"
-                                value="credito" checked required>
-                            <label class="form-check-label" for="credit">Tarjeta de crédito</label>
-                        </div>
-                        <div class="form-check">
-                            <input id="debito" name="paymentMethod" type="radio" class="form-check-input" value="debito"
-                                required>
-                            <label class="form-check-label" for="debit">Tarjeta de débito</label>
-                        </div>
-                        <div class="form-check">
-                            <input id="efectivo" name="paymentMethod" type="radio" class="form-check-input"
-                                value="efectivo" required>
-                            <label class="form-check-label" for="paypal">Efectivo</label>
-                        </div>
-                    </div>
-
-                    <hr class="my-4">
-
-                    <div class="text-center">
-                        <h3>Productos a enviar:</h3>
-                        <div id="listaProductos" class="list-group mb-3 mx-auto" style="list-style-type: none;"></div>
-                        <div id="camposOcultos"></div>
-                    </div>
-                    <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-success">Confirmar compra</button>
-                    </div>
+                            <hr class="my-4">
             </div>
             </form>
+            <% } %>
     </div>
-
-    <% } else { %>
+    <%} else { %>
         <button onclick="location.href='/login';" class="btn btn-dark">Inicia sesión aquí para poder realizar la
             compra</button>
         <% } %>
@@ -209,7 +451,6 @@
                  * Cada producto se muestra en una tarjeta con su imagen, nombre y precio.
                  * Incluye un botón para agregar el producto al carrito de compras.
                  */
-
                 function mostrarProductos() {
                     var productosDiv = document.getElementById('productos');
                     productosDiv.innerHTML = '';
@@ -230,6 +471,7 @@
                         productosDiv.appendChild(productoDiv);
                     });
                 }
+
 
                 //Agrega el producto al carrito
                 function agregarAlCarrito(index) {
@@ -264,7 +506,7 @@
                 function mostrarCarrito() {
                     var carritoDiv = document.getElementById('carrito');
                     carritoDiv.innerHTML = '';
-                    carritoDiv.className = 'row row-cols-1 row-cols-md-4 g-4';
+                    carritoDiv.className = 'row row-cols-1 row-cols-md-5 g-5';
                     carrito.forEach(function (producto, index) {
                         var productoDiv = document.createElement('div');
                         productoDiv.className = 'col';
@@ -276,9 +518,9 @@
                             '<h5 class="card-title">' + producto.nombre + '</h5>' +
                             '<p class="card-text">Precio: ' + producto.precio + '</p>' +
                             '<div class="d-flex justify-content-center align-items-center mb-2">' +
-                            '<button class="btn btn-primary mr-2" onclick="subirCantidad(' + index + ')">+</button>' +
-                            '<span class="mx-2">' + producto.cantidad + '</span>' +
                             '<button class="btn btn-primary ml-2" onclick="bajarCantidad(' + index + ')">-</button>' +
+                            '<span class="mx-2">' + producto.cantidad + '</span>' +
+                            '<button class="btn btn-primary mr-2" onclick="subirCantidad(' + index + ')">+</button>' +
                             '</div>' +
                             '<button class="btn btn-danger mt-2" onclick="eliminarDelCarrito(' + index + ')">Eliminar del carrito</button>' +
                             '</div>';

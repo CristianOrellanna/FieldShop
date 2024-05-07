@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT ?? 5000;
+const port = process.env.PORT || 5000;
 
 //urlencoded para capturar datos del formulario
 app.use(express.urlencoded({ extended: false }));
@@ -14,8 +14,10 @@ const server = app.listen(port, (req, res) => {
 module.exports = server; 
 
 //dotenv para variables de entorno
+/*
 const dotenv = require('dotenv');
 dotenv.config({ path: './env/.env' });
+*/
 
 //directorio público
 app.use('/resources', express.static('public'));

@@ -1,14 +1,14 @@
 const express = require('express');
 const app = express();
-const port = process.env.PORT || 5000;
+const PORT = process.env.PORT || 3000;
 
 //urlencoded para capturar datos del formulario
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
 //asignacion del puerto, const "server" para exportar el servidor en lugar de la app, para usar supertest(test)
-const server = app.listen(port, (req, res) => {
-    console.log('Hola!, el servidor esta corriendo en el puerto:', port);
+const server = app.listen(PORT, (req, res) => {
+    console.log('Hola!, el servidor esta corriendo en el puerto:', PORT);
 });
 //exportando "server" para usar en testing
 module.exports = server; 

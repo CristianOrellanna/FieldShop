@@ -66,27 +66,27 @@ app.post('/register', async (req, res) => {
     const direccion = req.body.direccion;
     let passwordHash = await bcryptjs.hash(pass, 8);
     // Como primer paso, se debe encontrar el IdRol correspondiente al nombre del rol
-    connection.query('SELECT IdRol FROM Roles WHERE RolName = ?', [rol], async (error, results) => {
+    connection.query('SELECT IdRol FROM roles WHERE RolName = ?', [rol], async (error, results) => {
         if (error) {
             console.log(error);
             res.send('Error al buscar el rol');
         } else if (results.length > 0) {
             let idRol = results[0].IdRol;
             // Insertar el nuevo usuario
-            connection.query('INSERT INTO Usuarios SET ?', { user: user, name: name, pass: passwordHash }, async (error, results) => {
+            connection.query('INSERT INTO usuarios SET ?', { user: user, name: name, pass: passwordHash }, async (error, results) => {
                 if (error) {
                     console.log(error);
                     res.send('Error al insertar el usuario');
                 } else {
                     let idCliente = results.insertId;// Se obtiene el IdCliente del usuario recién insertado
                     // Se asigna el rol al usuario
-                    connection.query('INSERT INTO UsuarioRoles SET ?', { IdCliente: idCliente, IdRol: idRol }, async (error, results) => {
+                    connection.query('INSERT INTO usuarioroles SET ?', { IdCliente: idCliente, IdRol: idRol }, async (error, results) => {
                         if (error) {
                             console.log(error);
                             res.send('Error al asignar el rol al usuario');
                         } else {
                             // Insertar el sexo del usuario
-                            connection.query('INSERT INTO Sexo_Usuarios SET ?', { IdCliente: idCliente, Sexo: sexo }, async (error, results) => {
+                            connection.query('INSERT INTO sexo_usuarios SET ?', { IdCliente: idCliente, Sexo: sexo }, async (error, results) => {
                                 if (error) {
                                     console.log(error);
                                     res.send('Error al insertar el sexo del usuario');
@@ -117,7 +117,7 @@ app.post('/auth', async (req, res) => {
     const user = req.body.user;
     const pass = req.body.pass;
     if (user && pass) {
-        connection.query('SELECT * FROM Usuarios WHERE user = ?', [user], async (error, results) => {
+        connection.query('SELECT * FROM usuarios WHERE user = ?', [user], async (error, results) => {
             if (results.length == 0 || !(await bcryptjs.compare(pass, results[0].pass))) {
                 res.send('<script>alert("Usuario y/o contraseña incorrectos"); window.location = "login";</script>');
             } else {

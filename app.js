@@ -30,7 +30,7 @@ app.set('view engine', 'ejs');
 const bcryptjs = require('bcryptjs');
 
 //session variable
-const session = require('express-session');
+const session = require('cookie-session');
 app.use(session({
     secret: 'secret',
     resave: true,

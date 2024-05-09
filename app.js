@@ -205,7 +205,6 @@ app.use(function (req, res, next) {
 
 //Al llamar esta ruta se cierra la sesion del usuario
 app.get('/logout', function (req, res) {
-    req.session.destroy(() => {
-        res.send('<script>alert("Sesion cerrada"); window.location = "/";</script>');
-    })
+    req.session = null;
+    res.send('<script>alert("Sesion cerrada"); window.location = "/";</script>');
 });
